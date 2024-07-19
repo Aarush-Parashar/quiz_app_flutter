@@ -17,21 +17,26 @@ class _QuestionScreenState extends State<QuestionScreen> {
       backgroundColor: const Color.fromARGB(54, 186, 18, 216),
       body: SizedBox(
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              currentQuestion.question,
-              style: const TextStyle(
-                fontSize: 30,
-                color: Colors.white,
+        child: Container(
+          margin: const EdgeInsets.all(40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                currentQuestion.question,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            const SizedBox(height: 45),
-            ...currentQuestion.answers.map((answers) {
-              return AnswerButton(answers, () {});
-            }),
-          ],
+              const SizedBox(height: 45),
+              ...currentQuestion.getShuffledAnswers().map((answers) {
+                return AnswerButton(answers, () {});
+              }),
+            ],
+          ),
         ),
       ),
     );
