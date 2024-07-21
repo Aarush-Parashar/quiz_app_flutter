@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback startQuiz;
@@ -17,14 +18,12 @@ class HomeScreen extends StatelessWidget {
             width: 500,
           ),
           const SizedBox(height: 35),
-          const Text(
-            'Learn Flutter the Fun way',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-              color: Colors.white,
-            ),
-          ),
+          Text('Learn Flutter the Fun way',
+              style: GoogleFonts.lato(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.white,
+              )),
           const SizedBox(height: 30),
           ElevatedButton.icon(
             icon: const Icon(Icons.arrow_right_alt),

@@ -10,7 +10,7 @@ class QuizApp extends StatefulWidget {
 }
 
 class _QuizAppState extends State<QuizApp> {
-  var activeScreen = 'questions-screen';
+  var activeScreen = 'home-screen';
 
   void switchScreen() {
     setState(() {
@@ -32,7 +32,7 @@ class _QuizAppState extends State<QuizApp> {
           begin: Alignment.topLeft,
           end: Alignment.bottomLeft,
         )),
-        child: activeScreen == 'start-screen'
+        child: activeScreen == 'home-screen'
             ? HomeScreen(switchScreen)
             : const QuestionScreen(),
       ),
