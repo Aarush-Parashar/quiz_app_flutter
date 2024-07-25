@@ -41,7 +41,7 @@ class _QuizAppState extends State<QuizApp> {
       screenWidget = QuestionScreen(onSelectAnswer: chooseAnswer);
     } else if (activeScreen == 'results-screen') {
       setState(() {
-        screenWidget = const ResultsScreen();
+        screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
       });
     }
 
