@@ -8,68 +8,73 @@ class QuestionsSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Adjust based on your requirement
-        childAspectRatio: 3, // Adjust based on your requirement
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-      ),
-      itemCount: summaryData.length,
-      itemBuilder: (ctx, index) {
-        final data = summaryData[index];
-        final isCorrect = data['selected_answer'] == data['correct_answer'];
-        return Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: isCorrect ? Colors.green : Colors.red,
-                child: Text(
-                  ((data['question_index'] as int) + 1).toString(),
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
+    return SizedBox(
+      height: 300,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: summaryData.map(
+            (data) {
+              final bool isCorrect =
+                  data['selected_answer'] == data['correct_answer'];
+              return Container(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      data['question'] as String,
-                      style: ThemeText.styleText,
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      'Your Answer: ${data['selected_answer']}',
-                      style: ThemeText.styleText.copyWith(
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
                         color: isCorrect ? Colors.green : Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        ((data['question_index'] as int) + 1).toString(),
+                        style: ThemeText.styleText.copyWith(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Correct Answer: ${data['correct_answer']}',
-                      style: ThemeText.styleText,
-                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data['question'] as String,
+                            style: ThemeText.styleText,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Your answer: ${data['selected_answer'] as String}',
+                            style: ThemeText.styleText.copyWith(
+                              color: Colors.orange,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            'Correct answer: ${data['correct_answer'] as String}',
+                            style: ThemeText.styleText.copyWith(
+                              color: Colors.green,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              );
+            },
+          ).toList(),
+        ),
+      ),
     );
   }
 }
