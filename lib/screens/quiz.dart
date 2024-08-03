@@ -29,7 +29,6 @@ class _QuizAppState extends State<QuizApp> {
       setState(() {
         activeScreen = 'results-screen';
       });
-      selectedAnswers = [];
     }
   }
 
